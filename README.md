@@ -1,6 +1,6 @@
 <div align="center">
 
-# Pingy
+# 🏓 Pingy
 
 A simple ICMP Echo implementation, based on golang.org/x/net/icmp.
 
@@ -40,7 +40,7 @@ You can download executable binaries from the latest release page.
 ### Build from source
 
 To build from source, clone this repository then run `make build` or
-`go install`. Develo_ping_ on `go1.2.0 linux/amd64`.
+`go install`. Develo_ping_ on `go1.20.1 linux/amd64`.
 
 Another way to install it if you have go in your machine just:
 
