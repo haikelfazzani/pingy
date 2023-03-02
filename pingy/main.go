@@ -1,4 +1,4 @@
-package main
+package pingy
 
 import (
 	"net"
@@ -9,11 +9,20 @@ import (
 	"golang.org/x/net/ipv4"
 )
 
-func Ping(host string, timeout time.Duration) (*icmp.Message, time.Duration, error) {
+var addr *net.IPAddr
+var err error
+
+func Ping(host string, timeout time.Duration, address string) (*icmp.Message, time.Duration, error) {
+
+	addr = &net.IPAddr{IP: net.ParseIP(address)}
+
 	// Resolve the IP address of the host
-	addr, err := net.ResolveIPAddr("ip", host)
-	if err != nil {
-		return nil, 0, err
+	if len(address) <= 0 {
+		addr, err = net.ResolveIPAddr("ip", host)
+
+		if err != nil {
+			return nil, 0, err
+		}
 	}
 
 	// Create an ICMP message

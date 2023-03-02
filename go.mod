@@ -1,4 +1,4 @@
-module ping
+module github.com/haikelfazzani/ping
 
 go 1.20
 
