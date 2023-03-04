@@ -9,27 +9,22 @@ import (
 	"golang.org/x/net/ipv4"
 )
 
-var addr *net.IPAddr
-var err error
-
 func Ping(host string, timeout time.Duration, address string) (*icmp.Message, time.Duration, error) {
 
-	addr = &net.IPAddr{IP: net.ParseIP(address)}
+	addr := &net.IPAddr{IP: net.ParseIP(address)}
 
 	// Resolve the IP address of the host
 	if len(address) <= 0 {
-		addr, err = net.ResolveIPAddr("ip", host)
-
-		if err != nil {
-			return nil, 0, err
-		}
+		addr, _ = net.ResolveIPAddr("ip", host)
 	}
 
 	// Create an ICMP message
 	message := icmp.Message{
-		Type: ipv4.ICMPTypeEcho, Code: 0,
+		Type: ipv4.ICMPTypeEcho,
+		Code: 0,
 		Body: &icmp.Echo{
-			ID: os.Getpid() & 0xffff, Seq: 1,
+			ID:   os.Getpid() & 0xffff,
+			Seq:  1,
 			Data: []byte("hello"),
 		},
 	}
